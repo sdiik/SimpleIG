@@ -172,7 +172,15 @@ final class ProfilePhotoViewController: UIViewController {
 
     @objc private func didTapLogout() {
         DefaultManager.shared.clear()
-        navigationController?.popToRootViewController(animated: true)
+        
+        guard let window = UIApplication.shared.windows.first else { return }
+        let loginVC = LoginViewController()
+        let nav = UINavigationController(rootViewController: loginVC)
+        window.rootViewController = nav
+        UIView.transition(with: window,
+                          duration: 0.3,
+                          options: [.transitionFlipFromLeft],
+                          animations: nil)
     }
 
     private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
