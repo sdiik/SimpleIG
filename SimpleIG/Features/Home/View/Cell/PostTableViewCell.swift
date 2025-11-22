@@ -203,7 +203,7 @@ class PostTableViewCell: UITableViewCell {
         captionLabel.text = post.caption
         likeCountLabel.text = "\(post.likeCount) likes"
         timeLabel.text = post.timestamp.formattedString
-        postImageView.kf.setImage(with: URL(string: post.imageUrl))
+        postImageView.setImage(from: post.imageUrl, placeholderSystemName: "photo.slash")
         profileImageView.setImage(from: post.ownerImage, placeholderSystemName: "person.crop.circle")
 
         let uid = DefaultManager.shared.get(DefaultManager.uid) ?? ""
