@@ -10,6 +10,14 @@ final class RegisterViewController: UIViewController {
     private lazy var errorLabel = makeErrorLabel()
     private lazy var activityIndicator = makeActivityIndicator()
     
+    private lazy var backToLoginButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Already have an account? Log in", for: .normal)
+        btn.setTitleColor(.systemGray, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        return btn
+    }()
+    
     private lazy var stackView = makeStackView(arrangedSubviews: [
         titleLabel,
         descriptionLabel,
@@ -18,6 +26,7 @@ final class RegisterViewController: UIViewController {
         passwordTextField,
         activityIndicator,
         signupButton,
+        backToLoginButton,
         errorLabel
     ], spacing: 12)
     
@@ -41,6 +50,7 @@ final class RegisterViewController: UIViewController {
     
     private func setupActions() {
         signupButton.addTarget(self, action: #selector(signupTapped), for: .touchUpInside)
+        backToLoginButton.addTarget(self, action: #selector(didTapBackToLogin), for: .touchUpInside)
     }
     
     @objc private func signupTapped() {
@@ -65,5 +75,9 @@ final class RegisterViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func didTapBackToLogin() {
+        navigationController?.popViewController(animated: true)
     }
 }
